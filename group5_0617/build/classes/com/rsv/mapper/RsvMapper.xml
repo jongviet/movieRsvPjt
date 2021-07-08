@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rsvMapper">
+
+    <!-- cfmNum 생성용; 현재 최대값 + 1 -->
+    <select id="cfmNum" resultType="java.lang.Integer">
+        select max(cfmNum) + 1 from
+        Ticket
+    </select>
+    
+    <!-- 좌석 조회용 -->
+    <select id="seatStatus" parameterType="scd_vo" resultType="map">
+        select distinct seatNum from schedule s inner join seat s2
+        on
+        s.scheduleNum = s2.scheduleNum where s.viewDate = "${viewDate}"
+        and
+        s.viewTime = "${viewTime}" and s.moviNum = ${moviNum} and
+        s2.usable_seat = "N";
+    </select>
+
+    <!-- 예매 정보 등록 - 스케쥴 -->
+    <insert id="sch_vo_insert" parameterType="scd_vo">
+        insert into
+        Schedule(scheduleNum, viewDate, viewTime, moviNum)
+        values(#{scheduleNum}, #{viewDate}, #{viewTime}, #{moviNum})
+    </insert>
+
+    <!-- 예매 정보 등록 - 좌석 -->
+    <insert id="seat_vo_insert" parameterType="seat_vo">
+        insert into Seat
+        (seatNum, scheduleNum) values
+        (#{seatNum}, #{scheduleNum})
+    </insert>
+
+    <!-- 예매 정보 등록 - 티켓 -->
+    <insert id="tk_vo_insert" parameterType="tk_vo">
+        insert into Ticket
+        (cfmNum, scheduleNum, seatNum, moviNum, email) values
+        (#{cfmNum},
+        #{scheduleNum}, #{seatNum}, #{moviNum}, #{email})
+    </insert>
+
+    <!-- 예약 리스트 출력용 -->
+    <select resultType="rvo" id="rsvList"
+        parameterType="java.lang.String">
+        select cfmNum, tk.scheduleNum , st.seatNum , m.moviName, scd.viewDate ,
+        scd.viewTime, m2.email from ticket tk
+        left outer join schedule scd on tk.scheduleNum =scd.scheduleNum
+        left outer join seat st on tk.scheduleNum = st.scheduleNum
+        left outer join movie m on tk.moviNum = m.moviNum
+        left outer join member m2 on tk.email = m2.email
+        where tk.email = #{email} order by scd.viewDate, scd.viewTime, scd.scheduleNum
+    </select>
+    
+    <delete id="scd_delete" parameterType="java.lang.Integer">
+        delete from Schedule where scheduleNum = #{scd_num}
+    </delete>
+    
+    <delete id="seat_delete" parameterType="java.lang.Integer">
+        delete from Seat where scheduleNum = #{scd_num}
+    </delete>
+    
+    <delete id="tk_delete" parameterType="java.lang.Integer">
+        delete from Ticket where scheduleNum = #{scd_num}
+    </delete>
+    
+    <!-- 영화 순위 -->
+    <select id="mrvo_rank" resultType="mrvo">
+        select count(t.moviNum), moviName from ticket t , movie m
+        where t.moviNum = m.moviNum
+        group by t.moviNum
+        order by count(t.moviNum) desc;
+    </select>
+    
+    <!-- 예매율 -->
+	<select id="tk_list" resultType="tk_vo">
+		select cfmNum from ticket
+	</select>
+    
+</mapper>

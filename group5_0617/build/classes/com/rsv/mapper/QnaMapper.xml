@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnaMapper">
+	<insert id="qAdd" parameterType="qvo">
+		insert into qna(memberNum,askType,email,title,content,imgfile)
+		values(#{memberNum},#{askType},#{email},#{title},#{content},#{imgfile})
+	</insert>
+	<select id="qList" resultType="qvo">
+		select qnaNum, askType, title, date, askStatus from qna
+		order by qnaNum desc 
+	</select>
+	<select id="qDetail" parameterType="java.lang.Integer" resultType="qvo">
+		select * from qna where qnaNum = #{qnaNum}
+	</select>
+	<delete id="qDelete" parameterType="java.lang.Integer">
+		delete from qna where qnaNum = #{qnaNum}
+	</delete>
+	<update id="qAnsStatusUp" parameterType="java.lang.Integer">
+		update qna set askStatus=1 where qnaNum = #{qnaNum}
+	</update>
+	<update id="qUnansStatusUp" parameterType="java.lang.Integer">
+		update qna set askStatus=0 where qnaNum = #{qnaNum}
+	</update>
+	<select id="lastQnaNum" resultType="java.lang.Integer">
+		select max(qnaNum) from qna;
+	</select>
+	<insert id="imgAdd" parameterType="java.util.List">
+      insert into qna_img (qnaNum, imgName, imgType) values
+      <foreach collection="list" item="ivo" separator=",">
+         (#{ivo.qnaNum}, #{ivo.imgName}, #{ivo.imgType})
+      </foreach>
+   </insert>
+   <delete id="imgDelete" parameterType="java.lang.Integer">
+   		delete from qna_img where qnaNum=#{qnaNum}
+   </delete>
+   <select id="imgSelect" parameterType="java.lang.Integer" resultType="ivo">
+		select * from qna_img where qnaNum = #{qnaNum}
+	</select>
+	<!-- 마이페이지 문의내역 -->
+    <select id="myQnaList" parameterType="java.lang.Integer" resultType="qvo">
+        select * from qna where memberNum = #{memberNum}
+        order by qnaNum desc
+    </select>
+</mapper>
+   

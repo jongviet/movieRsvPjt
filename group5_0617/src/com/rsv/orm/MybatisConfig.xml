@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- VO class alias 설정 -->
+	<typeAliases>
+		<typeAlias type="com.rsv.domain.MemVO" alias="mvo" />
+		<typeAlias type="com.rsv.domain.MovieVO" alias="mv_vo" />
+		<typeAlias type="com.rsv.domain.ScheduleVO" alias="scd_vo" />
+		<typeAlias type="com.rsv.domain.SeatVO" alias="seat_vo" />
+		<typeAlias type="com.rsv.domain.TicketVO" alias="tk_vo" />
+		<typeAlias type="com.rsv.domain.QnaVO" alias="qvo" />
+		<typeAlias type="com.rsv.domain.AnsVO" alias="avo" />
+		<typeAlias type="com.rsv.domain.QnaImgVO" alias="ivo" />
+		<typeAlias type="com.rsv.domain.RsvListVO" alias="rvo" />
+		<typeAlias type="com.rsv.domain.MoviRankVO" alias="mrvo" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://localhost:3306/groupfive" />
+				<property name="username" value="root" />
+				<property name="password" value="mysql" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- SQL mapper 연결 -->
+	<mappers>
+		<mapper resource="com/rsv/mapper/MemMapper.xml" />
+		<mapper resource="com/rsv/mapper/RsvMapper.xml" />
+		<mapper resource="com/rsv/mapper/QnaMapper.xml" />
+		<mapper resource="com/rsv/mapper/AnsMapper.xml" />
+	</mappers>
+</configuration>

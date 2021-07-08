@@ -1,0 +1,363 @@
+body{
+    background-color: #181a1c;
+	margin: 0 !important;
+}
+
+.primary-section .rsvInfo{
+	display: inline-block;
+}
+}
+.primary-section > .rsvInfo tr th td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: auto;
+    padding-inline: 30px;
+    text-align: center;
+} 
+.primary-section > .rsvInfo>thead>tr>th {
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 10px;
+} 
+.primary-section > .rsvInfo>tbody>tr>td {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    color : #fff;
+}
+
+
+#seatTable .rsvSeat {
+    border: none;
+    border-spacing: 5px;
+}  
+     
+#seatTable  .rsvSeat td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: auto;
+    padding-inline: 10px;
+    text-align: center;
+}
+
+#seatTable  .rsvSeat > tbody>tr>td {
+    padding: 10px;
+    height: 20px;
+    width: 20px;
+} 
+
+           
+#seatTable  .rsvSeat > td > a {
+    color: #fff;
+    text-decoration: none;
+} 
+       
+.rsvSeat>tbody>tr>td:hover {
+    background: #fece1a;
+}
+
+.footer-link > li {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.footer > .footer-link > li > a {
+	color: #fece1a;
+}
+
+.footer-link>li>a:hover {
+	font-weight: bolder;
+}
+
+.footer > .footer-link {
+    text-align: left;
+    list-style: none;
+    font-size: smaller;
+    margin-left: auto;
+}
+
+.footer > a {
+    text-decoration: none !important;
+}
+
+.footer > .footer-bottom > .team-info {
+    list-style: none;
+    text-align: left;
+    font-size: x-small;
+    margin-left: auto;
+}
+
+.footer {
+    background-color: #181a1c;
+    float: left;
+    width: 100%;
+    height: 140px;
+    line-height: 100%;
+    padding-top: 26px;
+}
+
+.footer > .footer-bottom > .team-info {
+	margin-top: 20px;
+}
+
+.footer > .footer-logo {
+    width: 30%;
+    height: 140px;
+    float: left;
+    text-align: right;
+    line-height: 100%;
+}
+
+.footer > .footer-tools {
+    float: right;
+    width: 30%;
+    height: 140px;
+    text-align: left;
+}
+
+@media (max-width: 1000px) {
+	.footer-tools{
+		display: none;
+	}
+}
+
+.btn{
+	font-family: NanumSquareRoundR !important;
+	font-weight: bolder !important;
+}
+
+@media (max-width: 1724px) {
+	.movieRank{
+		display: none;
+	}
+}
+.movieChart > #dailyMoiveChart > #asideWelcomePageMovieRank {
+	float: right;
+    text-align: center;
+    margin-right: 5%;
+    margin-left: -100%;
+    position: sticky;
+    top: 15%;
+}
+
+#asideWelcomePageMovieRank h2{
+	font-family: NanumSquareRoundR;
+	font-size: large;
+	margin-bottom: 0px;
+}
+
+#movieRankTable th {
+	border: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
+	font-weight: lighter;
+	font-size: smaller;
+	padding-inline: 10px;
+}
+
+#movieRankTable a:hover {
+	color: #FECE1a !important;
+}
+
+
+#qnaListPage, #qnaRegisterPage, #aRegisterPage, #mypageView, #adminPage {
+	text-align: center;
+}
+
+.qnaBackground {
+	background: rgba(255,255,255,0.9);
+	border-radius: 10px;
+	width: 1200px;
+	display: inline-block;
+	margin: 20px;
+	padding: 10px;
+}
+
+.qnaBackground > table{
+	width: 1160px;
+	margin: 20px;
+	margin-bottom: 100px;
+	color: #181a1c;
+	border: none;
+}
+
+#aRegisterPage > .qnaBackground > table, th, td {
+	border-bottom: 1px solid rgb(0, 0, 0, 0.4);
+}
+	
+#aRegisterPage > .qnaBackground > table > thead, td {
+	height : 30px;
+	margin : 20px;
+}
+
+#aRegisterPage > .qnaBackground > table > tbody > td > a:hover {
+	color: #181a1c;
+	font-weight: bolder !important;
+}
+
+#qnaListPage > .qnaBackground > table, th, td {
+	border-bottom: 1px solid rgb(0, 0, 0, 0.4);
+}
+	
+#qnaListPage > .qnaBackground > table > thead, td {
+	height : 30px;
+	margin : 20px;
+}
+
+#qnaListPage > .qnaBackground > table > tbody > td > a:hover {
+	color: #181a1c;
+	font-weight: bolder !important;
+}
+
+
+
+.form-group > label {
+	color: #181a1c;
+	font-weight: bolder;
+	display: inline-block;
+	margin-left: -40px;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+.form-group > input {
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 4px;
+	padding-left: 20px;
+	display: inline-block;
+	height: 30px !important;
+}
+
+.qnaBackground > .row {
+	width: 1200px;
+}
+
+
+.col-sm-6, .col-sm-12, .col-sm-8, .col-sm-4, .row, .form-group {
+	display: inline-block !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	text-align: center;
+}
+
+.col-sm-6 > .form-group > input, option {
+	width: 460px;
+}
+
+.col-sm-8 > .form-group > input {
+	width: 580px;
+}
+
+.col-sm-12 > .form-group > input {
+	width: 1000px;
+}
+
+.col-sm-12 > .form-group > textarea {
+	width: 800px;
+	height: 240px;
+}
+
+.form-group > #content{
+	width: 1000px !important;
+}
+.col-md-12{
+	display: inline-block;
+}
+
+#mypageView  .mypageBackground {
+	background: rgba(255,255,255,0.9);
+	border: 1px solid rgba(255,255,255,0.7);
+	border-radius: 10px;
+	width: 1200px;
+	display: inline-block;
+	margin: 20px;
+	padding: 10px;
+}
+
+
+#mypageView .mypageBackground > table{
+	width: 100%;
+	color: #181a1c;
+	margin-bottom: 20px;
+}
+
+#mypageView .mypageBackground > table, th, td {
+	border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+	
+#mypageView .mypageBackground > table > thead, td {
+	height : 36px;
+	margin : 20px;
+}
+
+
+#mypageView  .mypageTitle, .mypageBackground{
+	width: 1200px;
+	display: inline-block;
+}
+
+#mypageView .mypageTitle > h3, h4, a{
+	display: inline;
+	font-family: NanumSquareR !important;
+	color: #fff !important;
+}
+
+#mypageView .mypageTitle {
+	text-align: left !important;
+}
+
+
+#mypageView > .mypageTitle > h4 {
+	margin-left: 10px;
+}
+
+
+#mypageView > .mypageView > table > table, th, td, a {
+	text-align: center !important;
+	color: #181a1c;
+}
+
+
+#adminPage > .adminBackground {
+	text-align: center;
+	background: rgba(255,255,255,0.9);
+	border: 1px solid rgba(255,255,255,0.9);
+	border-radius: 10px;
+	width: 1200px;
+	display: inline-block;
+	margin: 20px;
+	padding: 10px;
+}
+
+#adminPage > .adminBackground > table{
+	width: 100%;
+	color: #181a1c;
+	margin-bottom: 20px;
+}
+
+#adminPage > .adminBackground > table, th, td {
+	border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+	height : 30px;
+}
+	
+
+#delBtnMemberListPage {
+	width : 320px;
+	heigth: 40px;
+	margin-bottom : 20px;
+}
+
+.team .thumbnail h3{
+	color: #fff;
+	font-weight: bolder;
+}
+
+.modal-dialog {
+      max-width: 800px;
+      margin: 30px auto;
+  }
+  
+@media (max-width: 1200px) {
+	.thumbnail ul li .video-btn{
+		display: none;
+	}
+}
+  

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ansMapper">
+	<insert id="aAdd" parameterType="avo">
+		insert into ans(qnaNum, answer)
+		values(#{qnaNum},#{answer})
+	</insert>
+	<select id="aList" parameterType="java.lang.Integer" resultType="avo">
+		select ansNum, answer, date from ans where qnaNum=#{qnaNum}	
+	</select>
+	<delete id="aDelete" parameterType="java.lang.Integer">
+		delete from ans where ansNum=#{ansNum}
+	</delete>
+	<delete id="aAllDelete" parameterType="java.lang.Integer">
+		delete from ans where qnaNum=#{qnaNum}
+	</delete>
+</mapper>
+   

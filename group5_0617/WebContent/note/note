@@ -1,0 +1,203 @@
+1.공지
+-네이밍: 인터페이스:MemDAO / 구현체:MemDAOImpl
+-작업물에 대한 주석 최대한 활용
+-log4j2 로컬 경로 수정해주세요~
+
+2.DB데이터
+
+create database groupFive;
+
+drop table IF EXISTS Member;
+drop table IF EXISTS Ticket;
+drop table IF EXISTS Schedule;
+drop table IF EXISTS Seat;
+drop table if exists movie;
+drop table if exists qna_img;
+drop table if exists qna;
+drop table if exists ans;
+
+Create table Member (
+	memberNum int(10) NOT null auto_increment,
+	email varchar(50) NOT NULL,
+	pwd varchar(20) NOT NULL,
+ Primary Key (memberNum));
+
+Create table Ticket (
+	cfmNum int(10) NOT NULL,
+	scheduleNum int(10) NOT NULL,
+	seatNum int(10) NOT NULL,
+	moviNum int(10) not null,
+	email varchar(50) NOT NULL,
+ Primary Key (cfmNum));
+
+Create table Schedule (
+	scheduleNum int(10) NOT NULL,
+	viewDate varchar(20) NOT NULL,
+	viewTime varchar(20) not null,
+	moviNum int(10) not null,
+ Primary Key (scheduleNum));
+
+Create table Seat (
+	seatNum int(10) NOT NULL,     
+	usable_seat Char(1) NOT NULL DEFAULT "N",
+	scheduleNum int(10) NOT NULL,
+ Primary Key (scheduleNum));
+
+Create table Movie (
+    moviNum int(10) not null auto_increment,
+    viewable_movi Char(1) NOT NULL DEFAULT "Y",
+    moviName varchar(20),
+    moviRate varchar(10),
+    moviGenre varchar(20),
+    moviDesc varchar(1000),
+ Primary Key (moviNum));
+
+create table if not exists qna(
+    qnaNum bigint(20) primary key auto_increment,
+    memberNum int(20) not null,
+    askType varchar(20) default null,
+    email varchar(50) not null,
+    title varchar(200) default null,
+    content varchar(2000) default null,
+    askStatus  int(10) default 0,
+    imgfile varchar(2000) default null,
+    date timestamp default current_timestamp
+) ENGINE=InnoDB default charset=utf8;
+
+drop table if exists ans;
+
+create table if not exists ans(
+    ansNum bigint(20) primary key auto_increment,
+    qnaNum bigint(20) not null,
+    answer varchar(2000) default null,
+    date timestamp default current_timestamp
+) ENGINE=InnoDB default charset=utf8;
+
+drop table if exists qna_img;
+
+create table if not exists qna_img(
+imgNum bigint(20) primary key auto_increment,
+qnaNum bigint(20) not null,
+imgName varchar(2000) not null,
+imgType varchar(10) not null,
+imgDate timestamp not null default current_timestamp on update current_timestamp
+) ENGINE=InnoDB default charset=utf8;
+
+
+-- raw data
+
+insert into Movie (moviName, moviRate, moviGenre, moviDesc) values
+('크루엘라', '12세', '코미디', '처음부터 난 알았어. 내가 특별하단 걸그게 불편한 인간들도 있겠지만 모두의 비위를 맞출 수는 없잖아?그러다 보니 결국, 학교를 계속 다닐 수가 없었지우여곡절 런던에 오게 된 나, 에스텔라는 재스퍼와 호레이스를 운명처럼 만났고나의 뛰어난 패션 감각을 이용해 완벽한 변장과 빠른 손놀림으로 런던 거리를 싹쓸이 했어도둑질이 지겹게 느껴질 때쯤, 꿈에 그리던 리버티 백화점에 낙하산(?)으로 들어가게 됐어거리를 떠돌았지만 패션을 향한 나의 열정만큼은 언제나 진심이었거든근데 이게 뭐야, 옷에는 손도 못 대보고 하루 종일 바닥 청소라니인내심에 한계를 느끼고 있을 때, 런던 패션계를 꽉 쥐고 있는 남작 부인이 나타났어천재는 천재를 알아보는 법! 난 남작 부인의 브랜드 디자이너로 들어가게 되었지꿈을 이룰 것 같았던 순간도 잠시, 세상에 남작 부인이 ‘그런 사람’이었을 줄이야…그래서 난 내가 누군지 보여주기로 했어잘가, 에스텔라난 이제 크루엘라야!
+'),
+('컨저링3', '15세', '스릴러', '1981년, 미국 역사상 최초로 잔혹한 살인사건의 용의자가 악마가 살해하도록 시켰다고 주장하는 초유의 사태가 일어난다! 그리고 사건의 배후에는 악마에게 빙의된 소년이 있었는데…초자연 현상 연구가 워렌 부부의 사건 파일 중 여전히 미스터리로 남아있는 실화!진실 혹은 거짓? 살인사건의 범인, 인간인가 악마인가...'),
+('캐시트럭', '19세', '액션', '캐시트럭을 노리는 무장 강도에 의해 아들을 잃은 H(제이슨 스타뎀). 분노에 휩싸인 그는 아들을 죽인 범인의 단서를 찾기 위해현금 호송 회사에 위장 취업한다.첫 임무부터 백발백중 사격 실력을 자랑하며,단숨에 에이스로 급부상한 H.캐시트럭을 노리는 자들을 하나 둘 처리하며,아들을 죽인 범인들과 점점 가까워지는데…자비는 없다, 분노에 가득 찬 응징만이 남았다.6월, 그의 분노가 폭발한다!'),
+('분노의질주 - 더 얼티메이트', '12세', '액션', '도미닉(빈 디젤)은 자신과 가장 가까웠던 형제 제이콥(존 시나)이 사이퍼(샤를리즈 테론)와 연합해전 세계를 위기로 빠트릴 위험천만한 계획을 세운다는 사실을 알게 되고,이를 막기 위해 다시 한 번 패밀리들을 소환한다.가장 가까운 자가 한순간, 가장 위험한 적이 된 상황도미닉과 패밀리들은 이에 반격할 놀라운 컴백과 작전을 세우고지상도, 상공도, 국경도 경계가 없는 불가능한 대결이 시작되는데…'),
+('콰이어트플레이스2', '15세', '스릴러', '실체를 알 수 없는 괴생명체의 공격으로 일상의 모든 것이 사라진 세상,아이들 대신 죽음을 선택한 아빠의 희생 이후 살아남은 가족들은 위험에 노출된다.갓 태어난 막내를 포함한 아이들과 함께 소리 없는 사투를 이어가던 엄마 ‘에블린’은살아남기 위해 새로운 은신처를 찾아 집 밖을 나서지만, 텅 빈 고요함으로 가득한 바깥은 더 큰 위험이 도사리고 있는데...'),
+('귀멸의칼날 - 무한열차', '15세', '액션', '혈귀로 변해버린 여동생 ‘네즈코’를 인간으로 되돌릴 단서를 찾아 비밀조직 귀살대에 들어간 ‘탄지로.’‘젠이츠’, ‘이노스케’와 새로운 임무 수행을 위해 무한열차에 탑승 후귀살대 최강 검사 염주 ‘렌고쿠’와 합류한다. 달리는 무한열차에서 승객들이 하나 둘 흔적 없이 사라지자숨어있는 식인 혈귀의 존재를 직감하는 ‘렌고쿠’. 귀살대 ‘탄지로’ 일행과 최강 검사 염주 ‘렌고쿠’는어둠 속을 달리는 무한열차에서 모두의 목숨을 구하기 위해예측불가능한 능력을 가진 혈귀와 목숨을 건 혈전을 시작하는데…'),
+('파이프라인', '15세', '액션', '손만 대면 대박을 터트리는 도유 업계 최고 천공기술자 ‘핀돌이’는수천억의 기름을 빼돌리기 위해 거대한 판을 짠 대기업 후계자 ‘건우’의거부할 수 없는 제안에 빠져 위험천만한 도유 작전에 합류한다.프로 용접공 ‘접새’, 땅 속을 장기판처럼 꿰고 있는 ‘나과장’,괴력의 인간 굴착기 ‘큰삽’, 이 모든 이들을 감시하는 ‘카운터’까지!​그러나 저마다 다른 목적을 가진 이들이 서로를 속고 속이면서계획은 예상치 못한 방향으로 흘러가기 시작하는데...​인생 역전을 꿈꾸는 여섯 명의 도유꾼들​그들의 막장 팀플레이가 시작된다!'),
+('도라에몽: 스탠바이미 2', '전체관람가', '애니메이션','“할머니를 만나고 싶어!”어느 날 진구는 돌아가신 할머니와의 추억이 담긴 낡은 곰 인형을 발견하고할머니가 보고 싶은 마음에 도라에몽의 4차원 비밀도구 타임머신을 타고 과거로 향한다.느닷없이 찾아온 소년을 금세 진구라고 믿어주시는 할머니는 한 가지 소원을 말씀하시는데…“진구의 아내를 만나보고 싶구나”결혼식을 보여 드리기 위해 미래로 간 도라에몽과 진구!하지만 이슬이와의 결혼식 당일 신랑 진구는 도망가 버리고퉁퉁이와 비실이가 진구를 찾는 동안 이슬이는 진구를 믿고 기다리는데…할머니의 소원을 위해, 그리고 가족과 친구들, 좋아하는 이슬이와의 약속을 위해도라에몽과 진구의 과거와 현재, 미래를 넘나드는 스펙터클한 대모험이 시작된다!'),
+('아야와 마녀', '전체관람가', '애니메이션', '‘동료 마녀 12명을 완전히 따돌리면 아이를 찾으러 오겠다’는 수수께끼 같은 편지와 함께 성 모어발트의 집에 맡겨진 아야. 10살이 된 어느 날, 아야는 갑자기 찾아온 마법사 벨라와 맨드레이크를 따라 미스터리한 저택에 발을 들이게 된다. 순간이동할 수 있는 문부터 비밀의 방까지 신비로움으로 가득 찬 그곳에서의 생활이 시작되고, 아야는 벨라를 돕는 조건으로 마법을 배우기로 한다. 하지만 마법은 알려주지 않고 잔심부름만 시키는 마녀 벨라. 벨라를 골탕 먹이기 위한 마녀지망생 아야와 말하는 고양이 토마스의 아주 특별한 주문이 시작된다!');
+
+insert into member values ((select max(z.memberNum)+1 from member z), 'admin@admin.com', 1234), 
+insert into member values ((select max(z.memberNum)+1 from member z), 'test101@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test102@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test103@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test104@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test105@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test106@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test107@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test108@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test109@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test110@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test111@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test112@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test113@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test114@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test115@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test116@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test117@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test118@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test119@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test120@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test121@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test122@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test123@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test124@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test125@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test126@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test127@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test128@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test129@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test130@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test141@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test142@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test143@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test144@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test145@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test146@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test147@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test148@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test149@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test150@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test151@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test152@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test153@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test154@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test155@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test156@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test157@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test158@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test159@test.com', 1234), 
+((select max(z.memberNum)+1 from member z), 'test160@test.com', 1234);
+
+-- 답변은 admin@admin.com만 등록 가능
+insert into qna(memberNum,askType,email,title,content,imgfile) values
+(2, '칭찬', 'test101@test.com', '직원분들이 너무 친절하십니다~~~', '칭찬해요~',''),
+(2, '칭찬', 'test101@test.com', '쾌적하고 좋네요 ~', '청소가 잘 되어있네요 ㅎ',''),
+(3, '문의', 'test102@test.com', '팝콘 맛은 몇 개에요??', '궁금합니다~',''),
+(3, '칭찬', 'test102@test.com', '영화 재밌게 잘 봤습니다^^', '다음에 또 이용할게요~',''),
+(4, '불만', 'test103@test.com', '직원들 교육 좀 다시 시키세요;;', '아주 엉망입니다ㅋㅋ',''),
+(4, '칭찬', 'test103@test.com', '영화 관람 편안하게 했습니다.', '다음에 또 이용할게요!',''),
+(5, '제안', 'test104@test.com', '팝콘 종류를 추가하는게 좋을 것 같아요 ㅎ', '지금보다 다양하면 좋을 것 같습니다~',''),
+(5, '칭찬', 'test104@test.com', '깨끗해서 좋았어요', '다음에 또 이용할게요 !!',''),
+(6, '불만', 'test105@test.com', '영화 음량이 별로였어요 ㅋㅋ', '확인 부탁드려요~',''),
+(6, '칭찬', 'test105@test.com', '친절해서 좋았습니다!!', '칭찬해요~',''),
+(7, '칭찬', 'test106@test.com', '직원분들이 너무 친절하십니다~~~', '다음에 또 이용할게요~',''),
+(7, '불만', 'test106@test.com', '앞좌석에 발을 올린 사람이 있던데 어떻게 된건가요?;;;;', '너무 별로였네요 ;;',''),
+(8, '불만', 'test107@test.com', '화장실 상태가 엉망이에요', '화장실 청소에 더욱 신경을 써주세요 ㅋㅋ',''),
+(8, '문의', 'test107@test.com', '깨끗해서 좋았어요', '다음에 또 이용할게요 !!','');
+
+-- 티켓 파트 테이블 insert, 회원 명칭 주의
+insert into Ticket (cfmNum, scheduleNum, seatNum, moviNum, email) values
+(1, 502248, 1, 2, "test101@test.com"),
+(2, 502249, 2, 2, "test101@test.com"),
+(3, 502250, 3, 2, "test101@test.com"),
+(4, 502251, 4, 2, "test101@test.com"),
+(5, 502252, 5, 2, "test101@test.com"),
+(6, 502253, 6, 2, "test101@test.com"),
+(7, 502254, 7, 2, "test101@test.com"),
+(8, 502255, 8, 2, "test101@test.com"),
+(9, 502256, 9, 2, "test101@test.com"),
+
+insert into Schedule (scheduleNum, viewDate, viewTime, moviNum) values 
+(502248, "2021-06-30", "10:00~12:00", 2),
+(502249, "2021-06-30", "10:00~12:00", 2),
+(502250, "2021-06-30", "10:00~12:00", 2),
+(502251, "2021-06-30", "10:00~12:00", 2),
+(502252, "2021-06-30", "10:00~12:00", 2),
+(502253, "2021-06-30", "10:00~12:00", 2),
+(502254, "2021-06-30", "10:00~12:00", 2),
+(502255, "2021-06-30", "10:00~12:00", 2),
+(502256, "2021-06-30", "10:00~12:00", 2);
+
+insert into Seat (seatNum, scheduleNum) values
+(1, 502248),
+(2, 502249),
+(3, 502250),
+(4, 502251),
+(5, 502252),
+(6, 502253),
+(7, 502254),
+(8, 502255),
+(9, 502256);
+
